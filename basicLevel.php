@@ -53,6 +53,23 @@ echo "Sorted by someField:";
 var_dump(Sort::sortByField($array, 'someField', Sort::SORT_AS_STRING));
 
 
+/**
+ * Create new array with key & id from values
+ */
+
+function createArrayByFields($array, $keyField, $valueField) {
+    $out = [];    
+    return array_reduce($array, function($arr, $item) use ($keyField, $valueField) {
+            if (!isset($arr[$item[$keyField]])) {
+                $arr[$item[$keyField]] = $item[$valueField];            
+            }            
+            return $arr;                
+    }, []);
+}
+
+echo "Change values and keys in the array:";
+var_dump(createArrayByFields($array, 'name', 'id'));
+
 
 
 
